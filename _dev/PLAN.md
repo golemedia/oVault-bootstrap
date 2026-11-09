@@ -153,14 +153,14 @@ This repo is developed inside Tim's Overseer vault. To stop either one reading t
 - Overseer `CLAUDE.md` › Exclusions has a warning callout naming this folder as a template, not instructions.
 - `meta/vault-check.sh`, `pending-check.sh`, and `audit-metrics.sh` exclude `./overseer/repos/` (`board.sh` already excluded `*/repos/*`). Backups: `*.bak-20261108`.
 - Every wikilink in this repo is relative to *this* repo's root.
-- **Tim, one manual step:** Obsidian → Settings → Files and links → **Excluded files** → add `overseer/repos/`. This keeps these notes out of Overseer's search, graph, and link suggestions. Not done by script because Obsidian rewrites `.obsidian/app.json` while it's running.
+- Obsidian → Settings → Files and links → **Excluded files** includes `overseer/repos/`, so these notes stay out of Overseer's search, graph and link suggestions. **Done by Tim, confirmed 2026-11-08.**
 
 ## 9. To verify before tagging v1
 
-- Cowork auto-loads root `CLAUDE.md` on a fresh folder. If not, the README adds a one-line project-instructions paste.
+- ~~Cowork auto-loads root `CLAUDE.md` on a fresh folder.~~ **Confirmed on macOS 2026-11-08:** Tim's test copy started onboarding unprompted. The onboarding flow, including the Obsidian-newcomer additions, was reported working the same day.
 - `board.sh` and `vault-check.sh` run in a Cowork session started on a Windows PC (expected to work; see the platform note below).
-- A full onboarding run on a clean download, start to finish, including resuming mid-way in a new session.
-- `.gitattributes` export-ignore actually removes `_dev/` from the release ZIP. Check before tagging (§11, step 9).
+- ~~Full onboarding run on macOS.~~ **Checked by Tim, 2026-11-08.** **Still open: the same run on a Windows PC** (Tim, later).
+- ~~`.gitattributes` export-ignore removes `_dev/` from the download.~~ **Checked by Tim, 2026-11-08: no `_dev/` in the download.**
 - `board.sh` and `vault-check.sh` were tested on Linux on 2026-11-08: a clean vault, plus a test project exercising every board section and every check. They also ran clean in Cowork on Tim's Mac the same day.
 
 **Platform note: one set of scripts covers every platform.** The agent runs the scripts, and Cowork runs the agent's commands inside a Linux virtual machine on both macOS and Windows; the user's folder is mounted into it. So the scripts always run under Linux bash, whatever the host is. No PowerShell versions are needed. Windows-specific points:
