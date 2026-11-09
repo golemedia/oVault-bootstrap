@@ -13,6 +13,7 @@ The first-run conversation. Read this file only while `onboarding` in [[CLAUDE]]
 ## How to run it
 
 - **It's a conversation, not a form.** Ask two or three questions at a time. Offer choices with a suggested default, and always accept the user's own answer instead.
+- **Assume no prior experience.** The user may be new to Obsidian, to Claude, or to both, and may have installed Obsidian only because this vault needed it. Use plain language, and explain each term the first time it comes up (glossary in [[core/obsidian-basics]]) until their answers in Stage 0 say they're comfortable.
 - **Anything can be skipped.** A skipped question keeps its default; say what the default is.
 - **Write at the end of every stage** (R-01, R-04). Then set `onboarding-stage` in `CLAUDE.md` to the next stage. If the session ends, the next one resumes from there.
 - **When resuming,** say in one line what's already set up and which stage comes next.
@@ -25,6 +26,14 @@ Set `onboarding: in-progress`. In a few sentences, explain:
 - this vault is a shared memory between the user and their agent
 - the agent starts every session blank and knows only what's written here
 - setup takes about 15–30 minutes, can stop at any point, and picks up where it left off
+
+Ask how familiar they are with:
+- **Obsidian:** never used it · used it a little · comfortable
+- **Working with Claude in Cowork:** first time · some · a lot
+
+Write both answers right away as two lines in `CLAUDE.md` › Working style, for example `Obsidian: new`. From here on, set how much you explain by them.
+
+If they're new to Obsidian, offer the hands-on basics first: [[core/obsidian-basics]] › Guided first steps, about 5 minutes. Run it before the tour if they accept.
 
 Offer the tour: **short** (about 2 minutes), **full** (about 10 minutes), or **skip** (it can be run any time later).
 
@@ -56,7 +65,8 @@ Write each answer as one line in `CLAUDE.md` › Working style, and remove the p
 5. **Deadlines and pace:** [mention them only when asked] · remind me
 6. **Small, reversible actions:** [ask first] · just do them and tell me
 7. **Feedback:** [plain and direct] · gentler. R-12 applies either way.
-8. **Anything the agent should never do.** This is open-ended. Each answer becomes a house rule in this stage.
+8. **Experience levels** from Stage 0: confirm them, or update them if a few minutes in Obsidian changed the answer.
+9. **Anything the agent should never do.** This is open-ended. Each answer becomes a house rule in this stage.
 
 ## Stage 5 · The rules
 

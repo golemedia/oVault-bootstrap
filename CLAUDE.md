@@ -38,7 +38,7 @@ See [[reference/about-me]]. Machines, accounts and tools: [[reference/environmen
 
 ## Working style
 
-*Filled in during onboarding. Until then: be concise, explain reasoning at decision points, and ask the user how they prefer to work.*
+*Filled in during onboarding. Until then: be concise, use plain language and explain any term the first time you use it, explain reasoning at decision points, and ask the user how they prefer to work.*
 
 ## Overrides
 

@@ -7,12 +7,12 @@ On its first run, your agent offers a tour of what's already built, then walks y
 ## What you need
 
 - [Obsidian](https://obsidian.md) (free), to read and browse your notes.
-- The Claude desktop app with Cowork, so your agent can work in a folder on your computer.
+- The Claude desktop app with Cowork, so your agent can work in a folder on your computer. It works on macOS and Windows. On Windows, Cowork runs in a small virtual machine and needs Windows' *Virtual Machine Platform* feature turned on. Windows Home editions can have trouble with this; Pro, Enterprise and Education work.
 
 ## Install
 
-1. **Download the latest release.** On this repository's **Releases** page, open the release marked **Latest** and download its ZIP. Unzip it wherever you'd like your vault to live, and rename the folder if you want. (You can also clone the repo, but the latest release is the tested version; the main branch may be a work in progress.)
-2. **Open it in Obsidian.** Choose *Open folder as vault* and pick the folder.
+1. **Download the latest release.** On this repository's **Releases** page, open the release marked **Latest** and download its ZIP. Unzip it wherever you'd like your vault to live, and rename the folder if you want. On Windows, pick a folder that's fully on your computer, not one synced through OneDrive (which `Documents` often is), so your agent never hits a file that's only in the cloud. (You can also clone the repo, but the latest release is the tested version; the main branch may be a work in progress.)
+2. **Open it in Obsidian.** Install Obsidian if you haven't, and start it. On its start screen, choose **Open folder as vault** and pick the folder you just unzipped. **Never used Obsidian? You don't need to learn it first.** Your agent will offer a short hands-on introduction during setup.
 3. **Open it in Claude.** Start a Cowork session with that folder and say anything. Your agent will take it from there.
 
 Setup takes about 15–30 minutes. You can stop at any point; the next session picks up where you left off.
@@ -32,6 +32,8 @@ This folder becomes your second brain: what you're working on, how you think, wh
 | `progress/`, `decisions.md`, `inbox.md` | What happened, why, and ideas for later |
 
 Ask your agent for the tour at any time to see what's in your vault and how it works.
+
+The two scripts in `core/scripts/` are run by your agent; you never need to run them yourself. If you'd like to, they need bash: it's built into macOS and Linux, and on Windows you can use Git Bash or WSL.
 
 ## Versions and upgrading
 

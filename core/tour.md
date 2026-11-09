@@ -19,7 +19,7 @@ Read only what the tour needs (R-09):
 | Look at | For |
 |---|---|
 | `ls` of the vault root, and of `projects/` | The map in section 2, including folders the user added |
-| [[CLAUDE]], which is already loaded | Identity, working style, Overrides, House rules, Projects |
+| [[CLAUDE]], which is already loaded | Identity, working style (including experience levels), Overrides, House rules, Projects |
 | `bash core/scripts/board.sh` | Live project status and the inbox count, for section 6 |
 | `core/VERSION` | Which release this vault is on |
 | [[core/rules]], which is already loaded | Rule titles and *guards against* lines |
@@ -31,6 +31,8 @@ If onboarding isn't complete, `CLAUDE.md` is mostly blank. Skip what doesn't exi
 
 - **Short (about 2 minutes):** one message of roughly 300 words. Give one or two sentences per section, in the order below, and end by offering the full version for any part.
 - **Full (about 10 minutes):** one section per message. After each one, pause for questions before moving on. Don't recite every file. Show the shape, then point to where the detail lives.
+
+**Match the user's experience.** Check the experience lines in [[CLAUDE]] › Working style. If they're new to Obsidian, or that hasn't been asked yet, assume no familiarity: explain each term the first time you use it (see the glossary in [[core/obsidian-basics]]), and describe things by what the user sees in Obsidian, not by file paths alone.
 
 In both versions, speak in the agent's own voice and personality once they're set ([[CLAUDE]] › Identity).
 
@@ -87,7 +89,8 @@ Skip this section, or keep it to one line, if onboarding hasn't reached it.
 
 ## 7 · Finding things yourself
 
-- Obsidian: open a note, follow its links, use search and the graph view.
+- **If the user is new to Obsidian** and hasn't done the basics yet, offer [[core/obsidian-basics]] › Guided first steps here instead of describing it.
+- **Otherwise:** they can open notes from the left sidebar, jump to one by name with Cmd+O / Ctrl+O, search every note with Cmd+Shift+F / Ctrl+Shift+F, and follow links.
 - Operational notes start with a **Quick reference** table (R-23).
 - Links always use full paths, such as `projects/name/INDEX`, so they're never ambiguous (R-22).
 

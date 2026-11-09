@@ -61,7 +61,7 @@ The tour assumes these steps are done. The README covers install; the agent neve
 | Tier | When read | Files |
 |---|---|---|
 | Every session | Always | `CLAUDE.md` (auto-loaded), `core/rules.md` |
-| When triggered | A specific condition | `core/onboarding.md` (until complete), `core/rules-why.md` (tour, rule questions, unclear cases), a project's `INDEX.md` (when work turns to it) |
+| When triggered | A specific condition | `core/onboarding.md` (until complete), `core/obsidian-basics.md` (user is new to Obsidian, or asks), `core/rules-why.md` (tour, rule questions, unclear cases), a project's `INDEX.md` (when work turns to it) |
 | On request | The user asks | `core/tour.md`, `core/UPGRADING.md`, `inbox.md`, the full progress log |
 
 - `core/rules.md` keeps each rule's instruction plus a one-line *guards against*; the full reasoning is in `core/rules-why.md`, one linked section per rule. This halves the every-session cost of the rules.
@@ -71,6 +71,8 @@ The tour assumes these steps are done. The README covers install; the agent neve
 **Tour reflects the vault as it is now.** `core/tour.md` lists what to cover and where to read it. It is not a script. The agent builds the tour from current state: core rules with overrides applied, house rules, projects, folders, and tags. A rerun six months later shows the user their vault, not the starter.
 
 **Onboarding is resumable.** State lives in `CLAUDE.md` frontmatter (`onboarding`, `onboarding-stage`), so it costs no extra read and survives session limits. Each stage writes its results when it ends.
+
+**Assume no prior experience.** A user may have installed Obsidian only because this vault needed it, and may never have used Claude in Cowork. Onboarding asks about both in Stage 0, records the answers in `CLAUDE.md` › Working style, and sets how much it explains by them. The README says up front that no Obsidian knowledge is needed.
 
 **Rules explain themselves.** Each rule states what it does, the failure it prevents, and why that failure is easy to miss. The reasons are generic and contain no maintainer anecdotes.
 
@@ -89,6 +91,7 @@ core/
   rules-why.md                release  reasoning per rule, on demand
   onboarding.md               release  stages, questions, write targets
   tour.md                     release  what to cover, where to look
+  obsidian-basics.md          release  glossary + hands-on first steps for Obsidian newcomers
   UPGRADING.md                release  how to apply core/upgrades/*
   upgrades/README.md          release  what an upgrade file contains; no vN files in v1
   scripts/board.sh            release  one line per project + inbox count
@@ -155,10 +158,16 @@ This repo is developed inside Tim's Overseer vault. To stop either one reading t
 ## 9. To verify before tagging v1
 
 - Cowork auto-loads root `CLAUDE.md` on a fresh folder. If not, the README adds a one-line project-instructions paste.
-- `board.sh` and `vault-check.sh` run in Cowork on Windows and macOS.
+- `board.sh` and `vault-check.sh` run in a Cowork session started on a Windows PC (expected to work; see the platform note below).
 - A full onboarding run on a clean download, start to finish, including resuming mid-way in a new session.
 - `.gitattributes` export-ignore actually removes `_dev/` from the release ZIP. Check before tagging (§11, step 9).
-- `board.sh` and `vault-check.sh` were tested on Linux on 2026-11-08: a clean vault, plus a test project exercising every board section and every check. They are written for macOS's older bash 3.2 and BSD `date`, but haven't been run on a Mac yet.
+- `board.sh` and `vault-check.sh` were tested on Linux on 2026-11-08: a clean vault, plus a test project exercising every board section and every check. They also ran clean in Cowork on Tim's Mac the same day.
+
+**Platform note: one set of scripts covers every platform.** The agent runs the scripts, and Cowork runs the agent's commands inside a Linux virtual machine on both macOS and Windows; the user's folder is mounted into it. So the scripts always run under Linux bash, whatever the host is. No PowerShell versions are needed. Windows-specific points:
+- **Cowork's VM needs Windows' Virtual Machine Platform feature and hardware virtualization.** Windows Home is reported to fail where Pro, Enterprise and Education work. The README says so.
+- **Line endings:** `.gitattributes` pins `*.sh` to LF, so a clone on Windows doesn't break the scripts with CRLF line endings.
+- **OneDrive:** Windows often redirects `Documents` to OneDrive, where files can be cloud-only. The README recommends a folder that's fully local.
+- **Running the scripts by hand** is optional. Windows has no bash of its own; Git Bash or WSL both work. The README mentions this.
 
 ## 10. Build order
 
@@ -181,16 +190,16 @@ Run these in **Terminal on your Mac**. Git can't run from Claude's side of the l
 
 ### First push
 
-| #   | Do                                                                                         | Expect                                                                                              | If not                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | `cd ~/Documents/Overseer/overseer/repos/oVault_bootstrap`                                  | No output                                                                                           | "No such file": check the path in Finder                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 2   | `git --version`                                                                            | `git version 2.x`                                                                                   | macOS offers to install Command Line Tools. Accept, then rerun                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| 3   | `git init -b main`                                                                         | `Initialized empty Git repository in …/oVault_bootstrap/.git/`                                      | "Reinitialized existing": a repo is already there, which is fine. Carry on                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| 4   | `git add -A && git status --short`                                                         | About 28 lines starting `A `, including `.obsidian/app.json` and `_dev/PLAN.md`. **No** `.DS_Store` | `.DS_Store` listed: `.gitignore` isn't at the folder root. Check `ls -a`                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| 5   | `git commit -m "oVault v1 draft"`                                                          | A line like `[main (root-commit) abc1234] oVault v1 draft`, then about 28 files changed             | "Please tell me who you are": run `git config --global user.name "Your Name"` and `git config --global user.email "you@example.com"`, then repeat 5                                                                                                                                                                                                                                                                                                                                              |
-| 6   | `git remote add origin https://github.com/golemedia/oVault-bootstrap.git && git remote -v` | Two `origin` lines (fetch, push)                                                                    | "remote origin already exists": run `git remote set-url origin` with the same URL                                                                                                                                                                                                                                                                                                                                                                                                                |
-| 7   | `git push -u origin main`                                                                  | Ends with `branch 'main' set up to track 'origin/main'`                                             | **Asked for a password, or a 403:** GitHub needs a token, not your password. Run `gh auth login` if you have `gh`, or create a personal access token on GitHub and paste it as the password. **"rejected … fetch first":** the GitHub repo isn't empty (it was created with a README or license). Look at it on github.com. If it holds only those auto-generated files, `git push --force -u origin main` replaces them. That overwrite can't be undone, so only do it if nothing there matters |
-| 8   | Open github.com/golemedia/oVault-bootstrap                                                 | All the files listed, and the README rendered below them                                            | Files missing: rerun 4 and look for errors                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| # | Do | Expect | If not |
+|---|---|---|---|
+| 1 | `cd ~/Documents/Overseer/overseer/repos/oVault_bootstrap` | No output | "No such file": check the path in Finder |
+| 2 | `git --version` | `git version 2.x` | macOS offers to install Command Line Tools. Accept, then rerun |
+| 3 | `git init -b main` | `Initialized empty Git repository in …/oVault_bootstrap/.git/` | "Reinitialized existing": a repo is already there, which is fine. Carry on |
+| 4 | `git add -A && git status --short` | About 28 lines starting `A `, including `.obsidian/app.json` and `_dev/PLAN.md`. **No** `.DS_Store` | `.DS_Store` listed: `.gitignore` isn't at the folder root. Check `ls -a` |
+| 5 | `git commit -m "oVault v1 draft"` | A line like `[main (root-commit) abc1234] oVault v1 draft`, then about 28 files changed | "Please tell me who you are": run `git config --global user.name "Your Name"` and `git config --global user.email "you@example.com"`, then repeat 5 |
+| 6 | `git remote add origin https://github.com/golemedia/oVault-bootstrap.git && git remote -v` | Two `origin` lines (fetch, push) | "remote origin already exists": run `git remote set-url origin` with the same URL |
+| 7 | `git push -u origin main` | Ends with `branch 'main' set up to track 'origin/main'` | **Asked for a password, or a 403:** GitHub needs a token, not your password. Run `gh auth login` if you have `gh`, or create a personal access token on GitHub and paste it as the password. **"rejected … fetch first":** the GitHub repo isn't empty (it was created with a README or license). Look at it on github.com. If it holds only those auto-generated files, `git push --force -u origin main` replaces them. That overwrite can't be undone, so only do it if nothing there matters |
+| 8 | Open github.com/golemedia/oVault-bootstrap | All the files listed, and the README rendered below them | Files missing: rerun 4 and look for errors |
 
 ### Freezing a release (after the §9 checks pass)
 
