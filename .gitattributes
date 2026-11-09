@@ -1,0 +1,4 @@
+# Maintainer notes are not part of release downloads
+_dev export-ignore
+# Keep shell scripts runnable when checked out on Windows
+*.sh text eol=lf

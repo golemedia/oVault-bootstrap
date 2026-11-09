@@ -1,0 +1,8 @@
+{
+  "newLinkFormat": "absolute",
+  "useMarkdownLinks": false,
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "_dev/"
+  ]
+}
